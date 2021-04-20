@@ -36,6 +36,31 @@ BONUS
 9. (Bonus) Chatbot dapat memberikan rekomendasi kata jika terdapat kesalahan kata
 
 
+KataPenting :
+    Kuis
+    Ujian
+    Tucil
+    Tubes
+    Tugas
+    Praktikum
+
+Penunjang
+Tugas :
+    Deadline
+Waktu:
+    Kapan
+    Antara
+    Pada
+    Sampai
+    Ketika
+    depan
+    sejauh
+UbahTask:
+    undur
+    selesai
+
+
+
 FRAMEWORK
 - Javascript
 
