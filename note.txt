@@ -59,6 +59,19 @@ UbahTask:
     undur
     selesai
 
+Struktur Task:
+    IdTask
+        IdKataPenting
+        Kode Matkul
+        Materi
+        Tanggal
+
+Struktur Task Selesai:
+    IdTask
+        IdKataPenting
+        Kode Matkul
+        Materi
+        Tanggal
 
 
 FRAMEWORK

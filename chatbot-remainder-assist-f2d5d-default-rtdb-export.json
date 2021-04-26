@@ -1,0 +1,60 @@
+{
+  "Kata-Kata Penting" : [ {
+    "Kata Penting" : "kuis"
+  }, {
+    "Kata Penting" : "ujian"
+  }, {
+    "Kata Penting" : "tucil"
+  }, {
+    "Kata Penting" : "tugas"
+  }, {
+    "Kata Penting" : "praktikum"
+  } ],
+  "Penunjang" : {
+    "Tugas-Tugas" : [ {
+      "Tugas" : "deadline"
+    } ],
+    "Ubah Task" : [ {
+      "Ubah Task" : "undur"
+    }, {
+      "Ubah Task" : "selesai"
+    } ],
+    "Waktu" : [ {
+      "Waktu" : "kapan"
+    }, {
+      "Waktu" : "antara"
+    }, {
+      "Waktu" : "pada"
+    }, {
+      "Waktu" : "sampai"
+    }, {
+      "Waktu" : "ketika"
+    }, {
+      "Waktu" : "depan"
+    }, {
+      "Waktu" : "sejauh"
+    } ]
+  },
+  "Task" : [ {
+    "IdKataPenting" : 0,
+    "Kode Matkul" : "IF2211",
+    "Materi" : "String matching",
+    "Tanggal" : "12/04/2021"
+  }, {
+    "IdKataPenting" : 0,
+    "Kode Matkul" : "IF2211",
+    "Materi" : "Knapsack Problem",
+    "Tanggal" : "8/10/2021"
+  }, {
+    "IdKataPenting" : 2,
+    "Kode Matkul" : "IF2211",
+    "Materi" : "Dynamic Programming",
+    "Tanggal" : "10/12/2021"
+  } ],
+  "Task Selesai" : [ {
+    "IdKataPenting" : 1,
+    "Kode Matkul" : "IF2210",
+    "Materi" : "Inheritance C++",
+    "Tanggal" : "12/12/2021"
+  } ]
+}
