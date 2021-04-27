@@ -78,7 +78,7 @@ FRAMEWORK
 - Javascript
 
 ALGORITMA
-- KMP
+- BM
 - Regex
 
 Pembagian Tugas
@@ -86,4 +86,4 @@ Pembagian Tugas
 - Zubair : 8, 3, 9
 - Yudi : 4, 5, 7
 
-Deadline : 25 atau 26 April 2021
+Deadline : 28 April 2021
