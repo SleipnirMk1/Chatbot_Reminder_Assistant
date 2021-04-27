@@ -34,24 +34,31 @@ dbRefTaskSelesai.orderByKey().on('value', snapshot => {
     dictTaskSelesai = snapshot.val();
 })
 
+// menambahkan kata penting pada tabel kata penting
 function addKataPenting(kataPenting) {
     dbRefKataPenting.child(listKataPenting.length).set({
         "Kata Penting": kataPenting
     });
     listKataPenting.push(kataPenting);
 }
+
+// menambahkan kata kunci tugas pada tabel Tugas
 function addTugas(tugas) {
     dbRefTugas.child(listTugas.length).set({
         "Tugas": tugas
     });
     listTugas.push(tugas);
 }
+
+// menambahkan kata kunci ubah task pada tabel ubahTask
 function addUbahTask(ubahTask) {
     dbRefUbahTask.child(listUbahTask.length).set({
         "Ubah Task": ubahTask
     });
     listUbahTask.push(ubahTask);
 }
+
+// menambahkan kata kunci waktu pada tabel waktu
 function addWaktu(waktu) {
     dbRefWaktu.child(listWaktu.length).set({
         "Waktu": waktu
@@ -59,6 +66,7 @@ function addWaktu(waktu) {
     listWaktu.push(waktu);
 }
 
+// menambahkan task pada tabel task
 function addTask(idKataPenting, kodeMatkul, materi, tanggal) {
     var task = {
         "IdKataPenting": idKataPenting,
@@ -69,25 +77,41 @@ function addTask(idKataPenting, kodeMatkul, materi, tanggal) {
     dbRefTask.child(parseInt(Object.keys(dictTask)[dictTask.length-1])+1).set(task);
     dbRefTask.orderByKey().on('value', snapshot => {dictTask = snapshot.val();})
 }
-function addTaskSelesai(idKataPenting, kodeMatkul, materi, tanggal) {
+
+// menambahkan taskselesai pada tabel task selesai
+function addTaskSelesai(idTask, idKataPenting, kodeMatkul, materi, tanggal) {
     var taskSelesai = {
         "IdKataPenting": idKataPenting,
         "Kode Matkul": kodeMatkul,
         "Materi": materi,
         "Tanggal": tanggal
     };
-    dbRefTaskSelesai.child(parseInt(Object.keys(dictTaskSelesai)[dictTaskSelesai.length-1])+1).set(taskSelesai);
+    dbRefTaskSelesai.child(idTask).set(taskSelesai);
     dbRefTaskSelesai.orderByKey().on('value', snapshot => {dictTaskSelesai = snapshot.val();})
 }
 
+// jika task selesai dikerjakan
+function taskSelesai(idTask) {
+    var element;
+    for (const key in dictTask) {
+        const el = object[key];
+        if (idTask == key) {
+            element = el;
+            break;
+        }
+    }
+    addTaskSelesai(element["IdKataPenting"], element["Kode Matkul"], element["Materi"], element["Tanggal"]);
+    deleteTask(idTask);
+}
 
-function updateTask(idKataPenting, kodeMatkul, materi, tanggalUpdate) {
+// update task
+function updateTask1(idKataPenting, kodeMatkul, materi, tanggalUpdate) {
     var idTask = 0;
     dbRefTask.orderByKey().on('value', snapshot => {
         for (var key in snapshot.val()) {
             var value = snapshot.val()[key];
             if (value["IdKataPenting"] === idKataPenting && value["Kode Matkul"] === kodeMatkul &&
-                value["Materi"] === materi) {
+            value["Materi"] === materi) {
                 idTask = key;
                 break;
             }
@@ -100,6 +124,16 @@ function updateTask(idKataPenting, kodeMatkul, materi, tanggalUpdate) {
     dbRefTask.orderByKey().on('value', snapshot => {dictTask = snapshot.val();})
 }
 
+// update task
+function updateTask2(idTask, tanggalUpdate) {
+    const newTanggal = {
+        "Tanggal": tanggalUpdate
+    };
+    dbRefTask.child(idTask).update(newTanggal);
+    dbRefTask.orderByKey().on('value', snapshot => {dictTask = snapshot.val();})
+}
+
+// delete task
 function deleteTask(idTask) {
     dbRefTask.child(idTask).remove();
     dbRefTask.orderByKey().on('value', snapshot => {dictTask = snapshot.val();})
