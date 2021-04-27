@@ -53,10 +53,5 @@
     "Materi" : "Dynamic Programming",
     "Tanggal" : "10/12/2021"
   } ],
-  "Task Selesai" : [ {
-    "IdKataPenting" : 1,
-    "Kode Matkul" : "IF2210",
-    "Materi" : "Inheritance C++",
-    "Tanggal" : "12/12/2021"
-  } ]
+  "Task Selesai" : []
 }

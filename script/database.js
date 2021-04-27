@@ -90,18 +90,20 @@ function addTaskSelesai(idTask, idKataPenting, kodeMatkul, materi, tanggal) {
     dbRefTaskSelesai.orderByKey().on('value', snapshot => {dictTaskSelesai = snapshot.val();})
 }
 
-// jika task selesai dikerjakan
-function taskSelesai(idTask) {
+// menandai task selesai dikerjakan
+function tandaiTaskSelesai(idTask) {
     var element;
     for (const key in dictTask) {
-        const el = object[key];
+        const el = dictTask[key];
+        // console.log(el);
         if (idTask == key) {
-            element = el;
+        //     element = el;
+            console.log(el);
+            addTaskSelesai(idTask, el["IdKataPenting"], el["Kode Matkul"], el["Materi"], el["Tanggal"]);
+            deleteTask(idTask);
             break;
         }
     }
-    addTaskSelesai(element["IdKataPenting"], element["Kode Matkul"], element["Materi"], element["Tanggal"]);
-    deleteTask(idTask);
 }
 
 // update task

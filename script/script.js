@@ -1,12 +1,13 @@
 function selfChat() {
     var messageResponse = listKataPenting[listKataPenting.length-1];
-    console.log(dictTask);
+    // console.log(dictTask);
     // addTask(0, "IF2211", "Knapsack Problem", "8/10/2021");
     // addTask(2, "IF2211", "Dynamic Programming", "10/12/2021");
     // updateTask(3, "IF2211", "Dynamic Programming", "12/04/2021");
     // deleteTask(1);
     // console.log(dictTask);
     // console.log(dictTaskSelesai);
+    // tandaiTaskSelesai(1);
     var message = document.getElementById("chatMessageText").value;
     if (message.length == 0) {
         return false;
