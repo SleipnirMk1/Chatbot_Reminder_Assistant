@@ -1,5 +1,17 @@
 function selfChat() {
-    var messageResponse = listKataPenting[listKataPenting.length-1];
+    var message = document.getElementById("chatMessageText").value;
+    if (message.length == 0) {
+        return false;
+    }
+    var messageResponse;
+    // messageResponse = listKataPenting[listKataPenting.length-1];
+    messageResponse = decision(message);
+    // console.log("listMelihatDaftarTask")
+    // console.log(listMelihatDaftarTask);
+    // console.log("listMenampilkanDeadline");
+    // console.log(listMenampilkanDeadline);
+    // console.log("listTandai");
+    // console.log(listTandai);
     // console.log(dictTask);
     // addTask(0, "IF2211", "Knapsack Problem", "8/10/2021");
     // addTask(2, "IF2211", "Dynamic Programming", "10/12/2021");
@@ -8,10 +20,7 @@ function selfChat() {
     // console.log(dictTask);
     // console.log(dictTaskSelesai);
     // tandaiTaskSelesai(1);
-    var message = document.getElementById("chatMessageText").value;
-    if (message.length == 0) {
-        return false;
-    }
+    
     
     sendChat(0, message);
     friendChat(messageResponse);

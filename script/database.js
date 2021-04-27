@@ -18,12 +18,41 @@ dbRefUbahTask.orderByKey().on('value', snapshot => {
     });
 })
 
+var listTandai = [];
+dbRefTandai.orderByKey().on('value', snapshot => {
+    snapshot.val().forEach(element => {
+        listTandai.push(element["Tandai"]);
+    });
+})
+
+var listMelihatDaftarTask = []
+dbRefMelihatDaftarTask.orderByKey().on('value', snapshot => {
+    snapshot.val().forEach(element => {
+        listMelihatDaftarTask.push(element["Waktu"]);
+    });
+})
+
+var listMenampilkanDeadline = []
+dbRefMenampilkanDeadline.orderByKey().on('value', snapshot => {
+    snapshot.val().forEach(element => {
+        listMenampilkanDeadline.push(element["Waktu"]);
+    });
+})
+
+var listHelp = []
+dbRefHelp.orderByKey().on('value', snapshot => {
+    snapshot.val().forEach(element => {
+        listHelp.push(element["Kata"]);
+    });
+})
+
 var listWaktu = [];
 dbRefWaktu.orderByKey().on('value', snapshot => {
     snapshot.val().forEach(element => {
         listWaktu.push(element["Waktu"]);
     });
 })
+
 var dictTask = {};
 dbRefTask.orderByKey().on('value', snapshot => {
     dictTask = snapshot.val();

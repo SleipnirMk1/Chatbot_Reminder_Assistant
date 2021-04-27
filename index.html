@@ -31,12 +31,17 @@
                 appId: "1:1085694182282:web:96a63769be594a99463e73",
                 measurementId: "G-68K080QKMV"
             };
+
             // Initialize Firebase
             firebase.initializeApp(firebaseConfig);
             firebase.analytics();
             const dbRefKataPenting = firebase.database().ref("/Kata-Kata Penting");
             const dbRefTugas = firebase.database().ref('/Penunjang/Tugas-Tugas');
             const dbRefUbahTask = firebase.database().ref('/Penunjang/Ubah Task');
+            const dbRefTandai = firebase.database().ref('/Penunjang/Tandai');
+            const dbRefMelihatDaftarTask = firebase.database().ref('/Penunjang/Melihat Daftar Task');
+            const dbRefMenampilkanDeadline = firebase.database().ref('/Penunjang/Menampilkan Deadline');
+            const dbRefHelp = firebase.database().ref('/Penunjang/Help');
             const dbRefWaktu = firebase.database().ref('/Penunjang/Waktu');
             const dbRefTask = firebase.database().ref('/Task');
             const dbRefTaskSelesai = firebase.database().ref('/Task Selesai');
@@ -44,17 +49,7 @@
 
         <div class="chatbox">
             <div class="chatlogs" id="chatlogs">
-                <div class="chat friend">
-                    <div class="user-photo"><img src="img/friendIcon.png" alt="Icon friend" /></div>
-                    <p class="chat-message">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit quia voluptatum minima eligendi corrupti impedit, quas ab hic enim numquam mollitia ex unde totam tempora cum
-                        aliquid perspiciatis quidem iste.
-                    </p>
-                </div>
-                <div class="chat self">
-                    <div class="user-photo"><img src="img/selfIcon.png" alt="Icon self" /></div>
-                    <p class="chat-message">Haii</p>
-                </div>
+
             </div>
             <div class="chat-form">
                 <textarea id="chatMessageText" onkeypress="if(event.keyCode == 13 && !event.shiftKey) {selfChat(); return false}"></textarea>
@@ -66,4 +61,5 @@
     <script src="script/script.js"></script>
     <script src="script/database.js"></script>
     <script src="script/PatternMatch.js"></script>
+    <script src="script/algorithm.js"></script>
 </html>
