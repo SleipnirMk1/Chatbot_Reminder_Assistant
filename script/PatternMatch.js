@@ -69,8 +69,26 @@ function getJenisTugas(string, listJenisTugas) {
 
 // Dapatkan array of tanggal
 function getTanggal(string) {
-    const polaTanggal = /\d\d\/\d\d\/\d\d+/g; // XX\XX\XXXX
+    // Format DD\MM\YYYY
+    const polaTanggal = /\d\d\/\d\d\/\d\d+/g;
     const tanggalArr = string.match(polaTanggal);
+    if (tanggalArr) {
+        return tanggalArr;
+    }
+
+    // Format DD MMMM YY, bulan dengan kata
+    const lowString = string.toLowerCase()
+    tanggalArr = []
+    var temp, re;
+    for (const key in listBulan) {
+        const element = listBulan[key];
+        re = new RegExp('[0-9][0-9] ' + element + ' [0-9][0-9]+' , 'g');
+        temp = lowString.match(re);
+        for (i in temp) {
+            tanggalArr.push(temp[i])
+        }
+    }
+
     if (tanggalArr) {
         return tanggalArr;
     }
@@ -78,7 +96,7 @@ function getTanggal(string) {
     return 'None'    
 }
 
-// Dapatkan matkul dalam bentuk array, contoh = ['IF3310']
+// Dapatkan matkul
 function getMatkul(string) {
     const polaMatkul = /IF\d\d\d\d/g;
     const matkul = string.match(polaMatkul);
@@ -91,8 +109,22 @@ function getMatkul(string) {
 
 // Testing
 var jenisTugas = ['Tubes', 'Tucil', 'Kuis']
+var bulan = [
+    'januari',
+    'februari',
+    'maret',
+    'april',
+    'mei',
+    'juni',
+    'juli',
+    'agustus',
+    'september',
+    'oktober',
+    'november',
+    'desember'
+];
 
-string = "Halo bot, tolong ingetin kalau ada kuis IF3110 Bab 2 sampai 3 pada 22/04/21"
+string = "Halo bot, tolong ingetin kalau ada kuis IF3110 Bab 2 sampai 3 pada 22 April 2021 dan 23 Mei 2021"
 console.log(getJenisTugas(string, jenisTugas))
 console.log(getTanggal(string))
 console.log(getMatkul(string))
