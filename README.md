@@ -23,6 +23,10 @@ Character-jump Technique melakukan suatu aksi ketika perbandingan antara dua kar
 
 -   Masuk ke folder src, lalu buka file index.html
 -   Atau melalui link https://chatbot-remainder-assist-f2d5d.web.app
+-   Untuk memanggil fitur, cukup chat ke chatbot dengan bahasa natural
+-   Ketika menambahkan tugas, untuk mendefinisikan topiknya, harus menggunakan kata “topik”
+-   Untuk mendefinisikan tugas dengan id tertentu, setelah kata “task” perlu diikuti dengan id task tersebut
+
 
 # Identitas
 
