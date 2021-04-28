@@ -82,6 +82,8 @@ function isExistKataWaktu(message) {
     return false;  
 }
 
+
+
 function decision(message) {
     if (isUpdate(message)) {
         // req: tanggal
@@ -95,7 +97,7 @@ function decision(message) {
         if (isReqAllExist) {
             if (dictTask.hasOwnProperty(idTask)) {
                 var element = dictTask[idTask];
-                // updateTask2(idTask, tanggal);
+                updateTask2(idTask, tanggal[0]);
                 return "Task " + idTask + " - " + 
                 element["Kode Matkul"] + " - " + 
                 listKataPenting[element["IdKataPenting"]] + " - " + 
@@ -117,7 +119,7 @@ function decision(message) {
         var element = dictTask[idTask];
         var isReqAllExist = true;
         if (isReqAllExist) {
-            // tandaiTaskSelesai(idTask);
+            tandaiTaskSelesai(idTask);
             return "Task " + idTask + " - " + 
             element["Kode Matkul"] + " - " + 
             listKataPenting[element["IdKataPenting"]] + " - " + 
@@ -142,7 +144,19 @@ function decision(message) {
     
     if (kataPenting != "None" && topik != "null") {
         // req: katapenting (sudah), kodematkul, topik, tanggal
-        return "Menambahkan task baru " + kataPenting;
+        var tanggal = getTanggal(message);
+        var kodeMatkul = getMatkul(message);
+        var idKataPenting = listKataPenting.indexOf(kataPenting);
+        if (tanggal != "None" && kodeMatkul != "None") {
+            // addTask(idKataPenting, kodeMatkul, topik, tanggal[0]);
+            return "[TASK BERHASIL DICATAT]\n"+ 
+            "(ID: "+(parseInt(Object.keys(dictTask)[Object.keys(dictTask).length-1])+1)+") " +
+            tanggal[0] + " - " + kodeMatkul + " - " + 
+            listKataPenting[idKataPenting] + " - " + 
+            topik;
+        } else {
+            return "Maaf, anda kekurangan informasi.";
+        }
     }
 
     if (isHelp(message)) {

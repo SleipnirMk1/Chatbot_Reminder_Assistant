@@ -83,7 +83,7 @@ function getMatkul(string) {
     const polaMatkul = /IF\d\d\d\d/g;
     const matkul = string.match(polaMatkul);
     if (matkul) {
-        return matkul;
+        return matkul[0];
     }
 
     return 'None' 

@@ -20,7 +20,7 @@ Tolong perlihatkan deadline tugas pada tanggal 27 april 2021 ???
 Deadline tugas IF2211 itu kapan?
 
 4. Memperbaharui task tertentu
-Deadline task 1 diundur menjadi 28/04/2021.
+Deadline task yang ke 1 diundur menjadi 28/04/2021.
 
 5. Menandai bahwa suatu task sudah selesai dikerjakan
 Saya sudah selesai mengerjakan task 2.

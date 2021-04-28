@@ -104,7 +104,6 @@ dbRefTaskSelesai.orderByKey().on('value', snapshot => {
 //     listWaktu.push(waktu);
 // }
 
-
 // menambahkan task pada tabel task
 function addTask(idKataPenting, kodeMatkul, materi, tanggal) {
     var task = {
@@ -113,7 +112,15 @@ function addTask(idKataPenting, kodeMatkul, materi, tanggal) {
         "Materi": materi,
         "Tanggal": tanggal
     };
-    dbRefTask.child(parseInt(Object.keys(dictTask)[dictTask.length-1])+1).set(task);
+    // console.log("dictTask");
+    // console.log(dictTask);
+    // console.log("Object.keys(dictTask)");
+    // console.log(Object.keys(dictTask));
+    // console.log(Object.keys(dictTask)[0]);
+    // console.log(Object.keys(dictTask).length);
+    // console.log("Object.keys(dictTask)[dictTask.length-1]");
+    // console.log(parseInt(Object.keys(dictTask)[Object.keys(dictTask).length-1])+1);
+    dbRefTask.child(parseInt(Object.keys(dictTask)[Object.keys(dictTask).length-1])+1).set(task);
     dbRefTask.orderByKey().on('value', snapshot => {dictTask = snapshot.val();})
 }
 
