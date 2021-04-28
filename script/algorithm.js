@@ -87,18 +87,49 @@ function decision(message) {
         // req: tanggal
         var idTask, tanggal;
         // idTask 0 ada, idTask 1 tidak ada
-        idTask = 0; // Task 0 - IF2211 - kuis - String matching tanggal berubah dari 12/02/2021 menjadi tanggal 12/02/2021
+        // idTask = 0; // Task 0 - IF2211 - kuis - String matching tanggal berubah dari 12/02/2021 menjadi tanggal 12/02/2021
         // idTask = 1; // Task tidak dapat ditemukan
+
+        var idxTask = boyerMoore(message, "task");
+        if (idxTask == -1) {
+            return "Task tidak ditemukan";
+        }
+
+        var idxID = idxTask;
+        var space = false;
+        while ((message[idxID] == " " || !space) && idxID < message.length) {
+            if (message[idxID] == " ") {
+                space = true;
+            }
+            idxID++;
+        }
+
+        if (idxID >= message.length) {
+            return "Input salah";
+        }
+
+        var id = "";
+        while (message[idxID] != " " && idxID < message.length) {
+            id += message[idxID];
+            idxID++;
+        }
+
         tanggal = getTanggal(message);
 
-        var isReqAllExist = tanggal != "None" && idTask != "None";
+        var isReqAllExist = tanggal != "None" && id != "None";
         if (isReqAllExist) {
-            if (dictTask.hasOwnProperty(idTask)) {
-                var element = dictTask[idTask];
-                updateTask2(idTask, tanggal[0]);
+            try {
+                var idInt = parseInt(id);
+            } catch (error) {
+                return "Id Task tidak ditemukan";
+            }
+
+            if (dictTask.hasOwnProperty(idInt)) {
+                var element = dictTask[idInt];
+                updateTask2(idInt, tanggal[0]);
                 return (
                     "Task " +
-                    idTask +
+                    idInt +
                     " - " +
                     element["Kode Matkul"] +
                     " - " +
@@ -121,24 +152,65 @@ function decision(message) {
     if (isTandai(message)) {
         // ...task x..., req: idTask
         var idTask;
-        idTask = 0;
-        var element = dictTask[idTask];
-        var isReqAllExist = true;
-        if (isReqAllExist) {
-            tandaiTaskSelesai(idTask);
-            return (
-                "Task " +
-                idTask +
-                " - " +
-                element["Kode Matkul"] +
-                " - " +
-                listKataPenting[element["IdKataPenting"]] +
-                " - " +
-                element["Materi"] +
-                " sudah dimasukkan ke dalam task daftar yang sudah dikerjakan"
-            );
-        } else {
-            return "Maaf, pesan tidak dikenali";
+
+        var idxTask = boyerMoore(message, "task");
+        if (idxTask == -1) {
+            return "Task tidak ditemukan";
+        }
+
+        var idxID = idxTask;
+        var space = false;
+        while ((message[idxID] == " " || !space) && idxID < message.length) {
+            if (message[idxID] == " ") {
+                space = true;
+            }
+            idxID++;
+        }
+
+        if (idxID >= message.length) {
+            return "Input salah";
+        }
+
+        var id = "";
+        while (message[idxID] != " " && idxID < message.length) {
+            id += message[idxID];
+            idxID++;
+        }
+
+        try {
+            var idInt = parseInt(id);
+            var found = false;
+            // console.log(idInt);
+            for (const key in dictTask) {
+                // console.log(key == idInt);
+                if (key == idInt) {
+                    console.log(key);
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                return "Id Task tidak ditemukan";
+            }
+
+            var element = dictTask[idInt];
+            if (true) {
+                tandaiTaskSelesai(idInt);
+                return (
+                    "Task " +
+                    idInt +
+                    " - " +
+                    element["Kode Matkul"] +
+                    " - " +
+                    listKataPenting[element["IdKataPenting"]] +
+                    " - " +
+                    element["Materi"] +
+                    " sudah dimasukkan ke dalam task daftar yang sudah dikerjakan"
+                );
+            }
+        } catch (error) {
+            return "Id Task tidak ditemukan";
         }
     }
 
