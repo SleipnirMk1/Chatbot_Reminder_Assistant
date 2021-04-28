@@ -1,10 +1,6 @@
 function isUpdate(message) {
     for (const key in listUbahTask) {
         const element = listUbahTask[key];
-        re = new RegExp(element);
-        if (re.test(message)) {
-            return true;
-        }
         if (boyerMoore(message, element) != -1) {
             return true;
         }
@@ -15,10 +11,6 @@ function isUpdate(message) {
 function isTandai(message) {
     for (const key in listTandai) {
         const element = listTandai[key];
-        re = new RegExp(element);
-        if (re.test(message)) {
-            return true;
-        }
         if (boyerMoore(message, element) != -1) {
             return true;
         }
@@ -29,10 +21,6 @@ function isTandai(message) {
 function isMenampilkanDeadline(message) {
     for (const key in listMenampilkanDeadline) {
         const element = listMenampilkanDeadline[key];
-        re = new RegExp(element);
-        if (re.test(message)) {
-            return true;
-        }
         if (boyerMoore(message, element) != -1) {
             return true;
         }
@@ -43,10 +31,6 @@ function isMenampilkanDeadline(message) {
 function isMelihatDaftarTask(message) {
     for (const key in listMelihatDaftarTask) {
         const element = listMelihatDaftarTask[key];
-        re = new RegExp(element);
-        if (re.test(message)) {
-            return true;
-        }
         if (boyerMoore(message, element) != -1) {
             return true;
         }
@@ -57,10 +41,6 @@ function isMelihatDaftarTask(message) {
 function isHelp(message) {
     for (const key in listHelp) {
         const element = listHelp[key];
-        re = new RegExp(element);
-        if (re.test(message)) {
-            return true;
-        }
         if (boyerMoore(message, element) != -1) {
             return true;
         }
@@ -71,10 +51,6 @@ function isHelp(message) {
 function isExistKataWaktu(message) {
     for (const key in listWaktu) {
         const element = listWaktu[key];
-        re = new RegExp(element);
-        if (re.test(message)) {
-            return true;
-        }
         if (boyerMoore(message, element) != -1) {
             return true;
         }
@@ -217,6 +193,19 @@ function decision(message) {
     var topik = getTopic(message);
     if (isMelihatDaftarTask(message) && isExistKataWaktu(message) && topik == "null") {
         // req: waktu (sudah)
+
+        var idxSejauh = boyerMoore(message, "sejauh");
+
+        if (idxSejauh != -1) {
+            var keys = [];
+            for (const key in dictTask) {
+                keys.push(key);
+            }
+
+            var task = "[Daftar Deadline]\n";
+            task += getTask(keys, keys.length);
+            return task;
+        }
 
         var waktu = getTanggal(message);
         if (waktu.length == 2) {
