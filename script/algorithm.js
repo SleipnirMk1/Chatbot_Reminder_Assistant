@@ -154,6 +154,7 @@ function decision(message) {
             try {
                 var date1 = new Date();
                 var date2 = new Date();
+                // console.log(time2);
 
                 date1.setFullYear(time1[2], time1[1], time1[0]);
                 date2.setFullYear(time2[2], time2[1], time2[0]);
@@ -178,6 +179,33 @@ function decision(message) {
                 return "Tidak ada deadline tugas";
             }
         } else if (waktu.length == 1) {
+            var time2 = waktu[0].split("/");
+            // console.log(time2);
+            try {
+                var date1 = new Date();
+                var date2 = new Date();
+
+                date2.setFullYear(time2[2], time2[1], time2[0]);
+
+                // console.log(date1);
+
+                var idTasks = [];
+                for (key in dictTask) {
+                    const element = dictTask[key];
+                    var timeTask = element["Tanggal"].split("/");
+                    var dateTask = new Date(timeTask[2], timeTask[1], timeTask[0]);
+                    if (date1 <= dateTask && dateTask <= date2) {
+                        idTasks.push(key);
+                    }
+                }
+
+                var task = "[Daftar Deadline]\n";
+                task += getTask(idTasks, idTasks.length);
+                return task;
+            } catch (error) {
+                console.log(error);
+                return "Tidak ada deadline tugas";
+            }
         }
     }
 
