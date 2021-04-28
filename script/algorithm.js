@@ -308,7 +308,7 @@ function decision(message) {
         var kodeMatkul = getMatkul(message);
         var idKataPenting = listKataPenting.indexOf(kataPenting);
         if (tanggal != "None" && kodeMatkul != "None") {
-            // addTask(idKataPenting, kodeMatkul, topik, tanggal[0]);
+            addTask(idKataPenting, kodeMatkul, topik, tanggal[0]);
             return (
                 "[TASK BERHASIL DICATAT]\n" +
                 "(ID: " +
