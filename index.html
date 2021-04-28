@@ -29,28 +29,26 @@
                 storageBucket: "chatbot-remainder-assist-f2d5d.appspot.com",
                 messagingSenderId: "1085694182282",
                 appId: "1:1085694182282:web:96a63769be594a99463e73",
-                measurementId: "G-68K080QKMV"
+                measurementId: "G-68K080QKMV",
             };
 
             // Initialize Firebase
             firebase.initializeApp(firebaseConfig);
             firebase.analytics();
             const dbRefKataPenting = firebase.database().ref("/Kata-Kata Penting");
-            const dbRefTugas = firebase.database().ref('/Penunjang/Tugas-Tugas');
-            const dbRefUbahTask = firebase.database().ref('/Penunjang/Ubah Task');
-            const dbRefTandai = firebase.database().ref('/Penunjang/Tandai');
-            const dbRefMelihatDaftarTask = firebase.database().ref('/Penunjang/Melihat Daftar Task');
-            const dbRefMenampilkanDeadline = firebase.database().ref('/Penunjang/Menampilkan Deadline');
-            const dbRefHelp = firebase.database().ref('/Penunjang/Help');
-            const dbRefWaktu = firebase.database().ref('/Penunjang/Waktu');
-            const dbRefTask = firebase.database().ref('/Task');
-            const dbRefTaskSelesai = firebase.database().ref('/Task Selesai');
+            const dbRefTugas = firebase.database().ref("/Penunjang/Tugas-Tugas");
+            const dbRefUbahTask = firebase.database().ref("/Penunjang/Ubah Task");
+            const dbRefTandai = firebase.database().ref("/Penunjang/Tandai");
+            const dbRefMelihatDaftarTask = firebase.database().ref("/Penunjang/Melihat Daftar Task");
+            const dbRefMenampilkanDeadline = firebase.database().ref("/Penunjang/Menampilkan Deadline");
+            const dbRefHelp = firebase.database().ref("/Penunjang/Help");
+            const dbRefWaktu = firebase.database().ref("/Penunjang/Waktu");
+            const dbRefTask = firebase.database().ref("/Task");
+            const dbRefTaskSelesai = firebase.database().ref("/Task Selesai");
         </script>
 
         <div class="chatbox">
-            <div class="chatlogs" id="chatlogs">
-
-            </div>
+            <div class="chatlogs" id="chatlogs"></div>
             <div class="chat-form">
                 <textarea id="chatMessageText" onkeypress="if(event.keyCode == 13 && !event.shiftKey) {selfChat(); return false}"></textarea>
                 <button class="sendButton" onclick="selfChat()"></button>
@@ -62,4 +60,5 @@
     <script src="script/database.js"></script>
     <script src="script/PatternMatch.js"></script>
     <script src="script/algorithm.js"></script>
+    <script src="script/topic.js"></script>
 </html>

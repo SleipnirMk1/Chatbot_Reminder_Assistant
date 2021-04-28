@@ -39,7 +39,7 @@ function isMenampilkanDeadline(message) {
             return true;
         }
     }
-    return false;    
+    return false;
 }
 
 function isMelihatDaftarTask(message) {
@@ -53,7 +53,7 @@ function isMelihatDaftarTask(message) {
             return true;
         }
     }
-    return false;   
+    return false;
 }
 
 function isExistKataPenting(message) {
@@ -85,7 +85,9 @@ function isHelp(message) {
 }
 
 function decision(message) {
-    if (isMelihatDaftarTask(message)) { 
+    return getTopic(message);
+
+    if (isMelihatDaftarTask(message)) {
         // req: tidak ada
         return "Melihat Daftar Task";
     }
@@ -98,21 +100,21 @@ function decision(message) {
     if (isUpdate(message)) {
         // req: tanggal
         return "Update";
-    } 
+    }
 
     if (isTandai(message)) {
         // ...task x..., req: idTask
         return "Tandai";
-    } 
+    }
 
     if (isHelp(message)) {
         // req: tidak ada
         return "Help";
-    } 
+    }
 
     if (isExistKataPenting(message)) {
         // req: katapenting (sudah), kodematkul, topik, tanggal
         return "Menambahkan task baru";
-    } 
+    }
     return "Maaf, pesan tidak dikenali";
 }
