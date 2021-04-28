@@ -79,10 +79,8 @@ function isExistKataWaktu(message) {
             return true;
         }
     }
-    return false;  
+    return false;
 }
-
-
 
 function decision(message) {
     if (isUpdate(message)) {
@@ -90,28 +88,36 @@ function decision(message) {
         var idTask, tanggal;
         // idTask 0 ada, idTask 1 tidak ada
         idTask = 0; // Task 0 - IF2211 - kuis - String matching tanggal berubah dari 12/02/2021 menjadi tanggal 12/02/2021
-        // idTask = 1; // Task tidak dapat ditemukan 
+        // idTask = 1; // Task tidak dapat ditemukan
         tanggal = getTanggal(message);
-        
+
         var isReqAllExist = tanggal != "None" && idTask != "None";
         if (isReqAllExist) {
             if (dictTask.hasOwnProperty(idTask)) {
                 var element = dictTask[idTask];
                 updateTask2(idTask, tanggal[0]);
-                return "Task " + idTask + " - " + 
-                element["Kode Matkul"] + " - " + 
-                listKataPenting[element["IdKataPenting"]] + " - " + 
-                element["Materi"] + " tanggal berubah dari " + 
-                element["Tanggal"] + " menjadi tanggal " +
-                tanggal;
+                return (
+                    "Task " +
+                    idTask +
+                    " - " +
+                    element["Kode Matkul"] +
+                    " - " +
+                    listKataPenting[element["IdKataPenting"]] +
+                    " - " +
+                    element["Materi"] +
+                    " tanggal berubah dari " +
+                    element["Tanggal"] +
+                    " menjadi tanggal " +
+                    tanggal
+                );
             } else {
                 return "Task tidak dapat ditemukan";
             }
         } else {
             return "Maaf, pesan tidak dikenali";
         }
-    } 
-    
+    }
+
     if (isTandai(message)) {
         // ...task x..., req: idTask
         var idTask;
@@ -120,28 +126,82 @@ function decision(message) {
         var isReqAllExist = true;
         if (isReqAllExist) {
             tandaiTaskSelesai(idTask);
-            return "Task " + idTask + " - " + 
-            element["Kode Matkul"] + " - " + 
-            listKataPenting[element["IdKataPenting"]] + " - " + 
-            element["Materi"] + " sudah dimasukkan ke dalam task daftar yang sudah dikerjakan";
+            return (
+                "Task " +
+                idTask +
+                " - " +
+                element["Kode Matkul"] +
+                " - " +
+                listKataPenting[element["IdKataPenting"]] +
+                " - " +
+                element["Materi"] +
+                " sudah dimasukkan ke dalam task daftar yang sudah dikerjakan"
+            );
         } else {
             return "Maaf, pesan tidak dikenali";
         }
     }
 
     var topik = getTopic(message);
-    if (isMelihatDaftarTask(message) && isExistKataWaktu(message) && topik == "null") { 
+    if (isMelihatDaftarTask(message) && isExistKataWaktu(message) && topik == "null") {
         // req: waktu (sudah)
-        
-        return "Melihat Daftar Task";
+
+        var waktu = getTanggal(message);
+        if (waktu.length == 2) {
+            var time1 = waktu[0].split("/");
+            var time2 = waktu[1].split("/");
+
+            try {
+                var date1 = new Date();
+                var date2 = new Date();
+
+                date1.setFullYear(time1[2], time1[1], time1[0]);
+                date2.setFullYear(time2[2], time2[1], time2[0]);
+
+                // console.log(date1);
+
+                var idTasks = [];
+                for (key in dictTask) {
+                    const element = dictTask[key];
+                    var timeTask = element["Tanggal"].split("/");
+                    var dateTask = new Date(timeTask[2], timeTask[1], timeTask[0]);
+                    if (date1 <= dateTask && dateTask <= date2) {
+                        idTasks.push(key);
+                    }
+                }
+
+                var task = "[Daftar Deadline]\n";
+                task += getTask(idTasks, idTasks.length);
+                return task;
+            } catch (error) {
+                console.log(error);
+                return "Tidak ada deadline tugas";
+            }
+        } else if (waktu.length == 1) {
+        }
     }
-    
+
     var kataPenting = getJenisTugas(message, listKataPenting);
     if (isMenampilkanDeadline(message) && kataPenting != "None") {
         // req: katapenting (sudah)
-        return "Menampilkan Deadline";
+
+        var deadline = getDeadline(message);
+
+        if (deadline == "null") {
+            return "Tidak ada deadline yang dimaksud";
+        } else {
+            var dead = "";
+            for (let i = 0; i < deadline.length; i++) {
+                if (i != deadline.length - 1) {
+                    dead += deadline[i] + ", ";
+                } else {
+                    dead += deadline[i];
+                }
+            }
+            return dead;
+        }
     }
-    
+
     if (kataPenting != "None" && topik != "null") {
         // req: katapenting (sudah), kodematkul, topik, tanggal
         var tanggal = getTanggal(message);
@@ -149,11 +209,19 @@ function decision(message) {
         var idKataPenting = listKataPenting.indexOf(kataPenting);
         if (tanggal != "None" && kodeMatkul != "None") {
             // addTask(idKataPenting, kodeMatkul, topik, tanggal[0]);
-            return "[TASK BERHASIL DICATAT]\n"+ 
-            "(ID: "+(parseInt(Object.keys(dictTask)[Object.keys(dictTask).length-1])+1)+") " +
-            tanggal[0] + " - " + kodeMatkul + " - " + 
-            listKataPenting[idKataPenting] + " - " + 
-            topik;
+            return (
+                "[TASK BERHASIL DICATAT]\n" +
+                "(ID: " +
+                (parseInt(Object.keys(dictTask)[Object.keys(dictTask).length - 1]) + 1) +
+                ") " +
+                tanggal[0] +
+                " - " +
+                kodeMatkul +
+                " - " +
+                listKataPenting[idKataPenting] +
+                " - " +
+                topik
+            );
         } else {
             return "Maaf, anda kekurangan informasi.";
         }
@@ -161,7 +229,108 @@ function decision(message) {
 
     if (isHelp(message)) {
         return getHelpMessage();
-    } 
-    
+    }
+
     return "Maaf, pesan tidak dikenali";
+}
+
+function getTask(keys, n) {
+    var tasks = "";
+    for (let i = 0; i < n; i++) {
+        const element = dictTask[keys[i]];
+        tasks += "(ID:" + keys[i] + ") " + element["Tanggal"] + " - " + element["Kode Matkul"] + " - " + listKataPenting[element["IdKataPenting"]] + " - " + element["Materi"] + "\n";
+    }
+    return tasks;
+}
+
+// getDeadline
+function getDeadline(message) {
+    var idxKataPenting = -1;
+    var kataPenting = "null";
+    for (let i = 0; i < listKataPenting.length; i++) {
+        const element = listKataPenting[i];
+        idxKataPenting = boyerMoore(message, element);
+        if (idxKataPenting != -1) {
+            kataPenting = element;
+            break;
+        }
+    }
+
+    if (idxKataPenting == -1) {
+        console.log("tidak ditemukan kata penting");
+        return "null";
+    }
+
+    var idxMatkul = idxKataPenting;
+    var space = false;
+    while ((message[idxMatkul] == " " || !space) && idxMatkul < message.length) {
+        if (message[idxMatkul] == " ") {
+            space = true;
+        }
+        idxMatkul++;
+    }
+
+    var kataMatkul = "";
+    while (message[idxMatkul] != " " && idxMatkul < message.length) {
+        kataMatkul += message[idxMatkul];
+        idxMatkul++;
+    }
+
+    // console.log(kataMatkul);
+
+    var deadlines = [];
+    for (const key in dictTask) {
+        if (dictTask[key]["Kode Matkul"] == kataMatkul) {
+            deadlines.push(dictTask[key]["Tanggal"]);
+        }
+    }
+
+    if (deadlines.length != 0) {
+        return deadlines;
+    } else {
+        var idxKataTask = boyerMoore(message, "task");
+        if (idxKataTask == -1) {
+            console.log("Tidak ada kata task");
+            return "null";
+        }
+
+        var idxID = idxKataTask;
+        var space = false;
+        while ((message[idxID] == " " || !space) && idxID < message.length) {
+            if (message[idxID] == " ") {
+                space = true;
+            }
+            idxID++;
+        }
+
+        if (idxID < message.length) {
+            var id = "";
+            while (message[idxID] != " " && idxID < message.length) {
+                id += message[idxID];
+                idxID++;
+            }
+
+            console.log(id);
+
+            try {
+                var idInt = parseInt(id);
+                for (const key in dictTask) {
+                    const element = dictTask[key];
+                    if (key == idInt) {
+                        deadlines.push(element["Tanggal"]);
+                    }
+                }
+
+                if (deadlines.length != 0) {
+                    return deadlines;
+                } else {
+                    return "null";
+                }
+            } catch (error) {
+                return "null";
+            }
+        } else {
+            return "null";
+        }
+    }
 }
