@@ -37,25 +37,62 @@ function boyerMoore(string, pattern) {
         }   
 
         if (match && i+j < sLen) {
-            console.log("Ditemukan di indeks ke " + i);
+            //console.log("Ditemukan di indeks ke " + i);
             return i;
         }
         else {
-            try {
-                i += shift.get( lowString[i+j] )
-            }
-            catch (e) {
-                i += pLen
+            var key = lowString.charAt(i + j);
+
+            if (typeof shift[key] == 'undefined') {
+                i += pLen;
+            } else {
+                i += shift[key];
             }
         }
     }
     
-    console.log("Tidak ditemukan")
+    //console.log("Tidak ditemukan")
     return -1
 }
 
-var string = "Aku ada kuis stima tanggal 15 mei tentang string matching"
-var pattern = "Kuis"
-var idx = boyerMoore(string, pattern)
-console.log(idx)
- 
+// Dapatkan jenis tugas (praktikum, pr, tubes, tucil, etc)
+function getJenisTugas(string, listJenisTugas) {
+    for (const i in listJenisTugas) {
+        const element = listJenisTugas[i]
+        if (boyerMoore(string, element) != -1) {
+            return element;
+        }
+    }
+    
+    return 'None'
+}
+
+// Dapatkan array of tanggal
+function getTanggal(string) {
+    const polaTanggal = /\d\d\/\d\d\/\d\d+/g; // XX\XX\XXXX
+    const tanggalArr = string.match(polaTanggal);
+    if (tanggalArr) {
+        return tanggalArr;
+    }
+
+    return 'None'    
+}
+
+// Dapatkan matkul dalam bentuk array, contoh = ['IF3310']
+function getMatkul(string) {
+    const polaMatkul = /IF\d\d\d\d/g;
+    const matkul = string.match(polaMatkul);
+    if (matkul) {
+        return matkul;
+    }
+
+    return 'None' 
+}
+
+// Testing
+var jenisTugas = ['Tubes', 'Tucil', 'Kuis']
+
+string = "Halo bot, tolong ingetin kalau ada kuis IF3110 Bab 2 sampai 3 pada 22/04/21"
+console.log(getJenisTugas(string, jenisTugas))
+console.log(getTanggal(string))
+console.log(getMatkul(string))
