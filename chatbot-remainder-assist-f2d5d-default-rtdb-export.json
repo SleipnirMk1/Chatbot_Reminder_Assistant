@@ -49,6 +49,19 @@
       "Waktu" : "depan"
     }, {
       "Waktu" : "sejauh"
+    } ],
+    "Waktu Tambah Task" : [ {
+      "Waktu" : "kapan"
+    }, {
+      "Waktu" : "antara"
+    }, {
+      "Waktu" : "pada"
+    }, {
+      "Waktu" : "ketika"
+    }, {
+      "Waktu" : "depan"
+    }, {
+      "Waktu" : "sejauh"
     } ]
   },
   "Task" : {

@@ -1,5 +1,3 @@
-// const { isError } = require("node:util");
-
 function isUpdate(message) {
     for (const key in listUbahTask) {
         const element = listUbahTask[key];
@@ -56,20 +54,6 @@ function isMelihatDaftarTask(message) {
     return false;
 }
 
-function isExistKataPenting(message) {
-    for (const key in listKataPenting) {
-        const element = listKataPenting[key];
-        re = new RegExp(element);
-        if (re.test(message)) {
-            return true;
-        }
-        if (boyerMoore(message, element) != -1) {
-            return true;
-        }
-    }
-    return false;
-}
-
 function isHelp(message) {
     for (const key in listHelp) {
         const element = listHelp[key];
@@ -99,21 +83,15 @@ function isExistKataWaktu(message) {
 }
 
 function decision(message) {
-    // return getTopic(message);
-
-    if (isMenampilkanDeadline(message) && isExistKataPenting(message)) {
-        // req: katapenting (sudah)
-        return "Menampilkan Deadline";
-    }
-    
     if (isUpdate(message)) {
         // req: tanggal
         var idTask, tanggal;
         // idTask 0 ada, idTask 1 tidak ada
         idTask = 0; // Task 0 - IF2211 - kuis - String matching tanggal berubah dari 12/02/2021 menjadi tanggal 12/02/2021
         // idTask = 1; // Task tidak dapat ditemukan 
-        tanggal = "12/02/2021";
-        var isReqAllExist = true;
+        tanggal = getTanggal(message);
+        
+        var isReqAllExist = tanggal != "None" && idTask != "None";
         if (isReqAllExist) {
             if (dictTask.hasOwnProperty(idTask)) {
                 var element = dictTask[idTask];
@@ -147,24 +125,29 @@ function decision(message) {
         } else {
             return "Maaf, pesan tidak dikenali";
         }
-    } 
-    
-    if (isHelp(message)) {
-        // req: tidak ada
-        return "Help";
-    } 
+    }
 
-    if (isMelihatDaftarTask(message) && isExistKataWaktu(message)) { 
+    var topik = getTopic(message);
+    if (isMelihatDaftarTask(message) && isExistKataWaktu(message) && topik == "null") { 
         // req: waktu (sudah)
         
         return "Melihat Daftar Task";
-    } 
-
-    if (isExistKataPenting(message)) {
-        // req: katapenting (sudah), kodematkul, topik, tanggal
-        
-        return "Menambahkan task baru";
     }
+    
+    var kataPenting = getJenisTugas(message, listKataPenting);
+    if (isMenampilkanDeadline(message) && kataPenting != "None") {
+        // req: katapenting (sudah)
+        return "Menampilkan Deadline";
+    }
+    
+    if (kataPenting != "None" && topik != "null") {
+        // req: katapenting (sudah), kodematkul, topik, tanggal
+        return "Menambahkan task baru " + kataPenting;
+    }
+
+    if (isHelp(message)) {
+        return getHelpMessage();
+    } 
     
     return "Maaf, pesan tidak dikenali";
 }

@@ -53,6 +53,15 @@ dbRefWaktu.orderByKey().on('value', snapshot => {
     });
 })
 
+// Penanda waktu untuk tambah task
+var listWaktuTambahTask = []
+dbRefWaktuTambahTask.orderByKey().on('value', snapshot => {
+    snapshot.val().forEach(element => {
+        listWaktuTambahTask.push(element["Waktu"]);
+    });
+})
+
+
 var dictTask = {};
 dbRefTask.orderByKey().on('value', snapshot => {
     dictTask = snapshot.val();
@@ -63,37 +72,38 @@ dbRefTaskSelesai.orderByKey().on('value', snapshot => {
     dictTaskSelesai = snapshot.val();
 })
 
-// menambahkan kata penting pada tabel kata penting
-function addKataPenting(kataPenting) {
-    dbRefKataPenting.child(listKataPenting.length).set({
-        "Kata Penting": kataPenting
-    });
-    listKataPenting.push(kataPenting);
-}
+// // menambahkan kata penting pada tabel kata penting
+// function addKataPenting(kataPenting) {
+//     dbRefKataPenting.child(listKataPenting.length).set({
+//         "Kata Penting": kataPenting
+//     });
+//     listKataPenting.push(kataPenting);
+// }
 
-// menambahkan kata kunci tugas pada tabel Tugas
-function addTugas(tugas) {
-    dbRefTugas.child(listTugas.length).set({
-        "Tugas": tugas
-    });
-    listTugas.push(tugas);
-}
+// // menambahkan kata kunci tugas pada tabel Tugas
+// function addTugas(tugas) {
+//     dbRefTugas.child(listTugas.length).set({
+//         "Tugas": tugas
+//     });
+//     listTugas.push(tugas);
+// }
 
-// menambahkan kata kunci ubah task pada tabel ubahTask
-function addUbahTask(ubahTask) {
-    dbRefUbahTask.child(listUbahTask.length).set({
-        "Ubah Task": ubahTask
-    });
-    listUbahTask.push(ubahTask);
-}
+// // menambahkan kata kunci ubah task pada tabel ubahTask
+// function addUbahTask(ubahTask) {
+//     dbRefUbahTask.child(listUbahTask.length).set({
+//         "Ubah Task": ubahTask
+//     });
+//     listUbahTask.push(ubahTask);
+// }
 
-// menambahkan kata kunci waktu pada tabel waktu
-function addWaktu(waktu) {
-    dbRefWaktu.child(listWaktu.length).set({
-        "Waktu": waktu
-    });
-    listWaktu.push(waktu);
-}
+// // menambahkan kata kunci waktu pada tabel waktu
+// function addWaktu(waktu) {
+//     dbRefWaktu.child(listWaktu.length).set({
+//         "Waktu": waktu
+//     });
+//     listWaktu.push(waktu);
+// }
+
 
 // menambahkan task pada tabel task
 function addTask(idKataPenting, kodeMatkul, materi, tanggal) {
@@ -169,3 +179,4 @@ function deleteTask(idTask) {
     dbRefTask.child(idTask).remove();
     dbRefTask.orderByKey().on('value', snapshot => {dictTask = snapshot.val();})
 }
+

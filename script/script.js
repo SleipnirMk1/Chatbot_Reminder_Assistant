@@ -6,6 +6,8 @@ function selfChat() {
     var messageResponse;
     // messageResponse = listKataPenting[listKataPenting.length-1];
     messageResponse = decision(message);
+    // console.log("listWaktuTambahTask");
+    // console.log(listWaktuTambahTask);
     // console.log("listWaktu");
     // console.log(listWaktu);
     // console.log("listMelihatDaftarTask")

@@ -33,8 +33,8 @@ function getTopic(message) {
     }
 
     var idxWaktu = -1;
-    for (const key in listMelihatDaftarTask) {
-        const element = listMelihatDaftarTask[key];
+    for (const key in listWaktuTambahTask) {
+        const element = listWaktuTambahTask[key];
         // Harusnya boyormoore
         // console.log(element);
         idxWaktu = boyerMoore(message, element);
