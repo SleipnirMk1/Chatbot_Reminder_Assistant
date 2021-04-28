@@ -13,13 +13,27 @@
     "Kata Penting" : "praktikum"
   } ],
   "Penunjang" : {
+    "Help" : [ {
+      "Kata" : "lakukan"
+    } ],
+    "Melihat Daftar Task" : [ {
+      "Kata" : "deadline"
+    }, {
+      "Kata" : "apa"
+    }, {
+      "Kata" : "sejauh"
+    } ],
+    "Menampilkan Deadline" : [ {
+      "Waktu" : "kapan"
+    } ],
+    "Tandai" : [ {
+      "Tandai" : "selesai"
+    } ],
     "Tugas-Tugas" : [ {
       "Tugas" : "deadline"
     } ],
     "Ubah Task" : [ {
       "Ubah Task" : "undur"
-    }, {
-      "Ubah Task" : "selesai"
     } ],
     "Waktu" : [ {
       "Waktu" : "kapan"
@@ -37,21 +51,29 @@
       "Waktu" : "sejauh"
     } ]
   },
-  "Task" : [ {
+  "Task" : {
+    "0" : {
+        "IdKataPenting" : 0,
+        "Kode Matkul" : "IF2211",
+        "Materi" : "String matching",
+        "Tanggal" : "12/02/2021"
+    },
+    "2" : {
+      "IdKataPenting" : 2,
+      "Kode Matkul" : "IF2211",
+      "Materi" : "Dynamic Programming",
+      "Tanggal" : "10/12/2021"
+    }
+  },
+  "Task Selesai" : [ {
     "IdKataPenting" : 0,
     "Kode Matkul" : "IF2211",
     "Materi" : "String matching",
-    "Tanggal" : "12/04/2021"
+    "Tanggal" : "12/02/2021"
   }, {
     "IdKataPenting" : 0,
     "Kode Matkul" : "IF2211",
     "Materi" : "Knapsack Problem",
     "Tanggal" : "8/10/2021"
-  }, {
-    "IdKataPenting" : 2,
-    "Kode Matkul" : "IF2211",
-    "Materi" : "Dynamic Programming",
-    "Tanggal" : "10/12/2021"
-  } ],
-  "Task Selesai" : []
+  } ]
 }

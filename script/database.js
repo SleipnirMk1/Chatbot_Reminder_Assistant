@@ -28,7 +28,7 @@ dbRefTandai.orderByKey().on('value', snapshot => {
 var listMelihatDaftarTask = []
 dbRefMelihatDaftarTask.orderByKey().on('value', snapshot => {
     snapshot.val().forEach(element => {
-        listMelihatDaftarTask.push(element["Waktu"]);
+        listMelihatDaftarTask.push(element["Kata"]);
     });
 })
 

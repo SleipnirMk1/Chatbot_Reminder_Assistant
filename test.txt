@@ -11,6 +11,8 @@ Apa saja deadline hari ini?
 3 minggu ke depan ada kuis apa saja?
 Apa saja deadline antara 03/04/2021 sampai 15/04/2021?
 Antara 03/04/2021 dan 15/04/2021 ada deadline apa saja ya?
+Tambahan:
+Tolong perlihatkan deadline tugas pada tanggal 27 april 2021
 
 3. Menampilkan deadline dari suatu task tertentu
 Deadline tugas IF2211 itu kapan?
