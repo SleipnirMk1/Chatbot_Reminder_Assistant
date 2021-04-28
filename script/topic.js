@@ -17,6 +17,12 @@ function getTopic(message) {
     // }
 
     var idxKataTopik = boyerMoore(message, "topik");
+
+    if (idxKataTopik == -1) {
+        console.log('Tidak ada terdapat kata "topik"');
+        return "null";
+    }
+
     var idx = idxKataTopik;
     var space = false;
     while (message[idx] == " " || !space) {
@@ -49,4 +55,33 @@ function getTopic(message) {
     } else {
         return message.substr(idx, message.length - idx);
     }
+}
+
+function getHelpMessage() {
+    var message = "[Fitur]\n";
+    var fitur = [
+        "Menambahkan task baru",
+        "Melihat daftar task yang harus dikerjakan",
+        "Menampilkan deadline dari suatu task",
+        "Memperbarui suatu task",
+        "Menandai suatu task telah selesai dikerjakan",
+    ];
+
+    const kataPenting = listKataPenting;
+
+    for (let i = 0; i < fitur.length; i++) {
+        message += i + 1 + ". " + fitur[i] + "\n";
+    }
+
+    message += "\n[Daftar kata penting]\n";
+
+    for (let i = 0; i < kataPenting.length; i++) {
+        if (i != kataPenting.length - 1) {
+            message += i + 1 + ". " + kataPenting[i] + "\n";
+        } else {
+            message += i + 1 + ". " + kataPenting[i];
+        }
+    }
+
+    return message;
 }
